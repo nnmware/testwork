@@ -1,0 +1,39 @@
+{% load url from future %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+
+<style type="text/css">
+TD #table_obj, TR #table_obj { padding: 10px; border: 1px solid #000; }
+TH { background: #000080; color: #ffe; text-align: left; }
+</style>
+
+<script>
+function model(url){
+    $.get( url, {}, function(data) {
+        $("#table_obj").html('');
+        var headers = data[0].fields;
+        $("#table_obj").append('<tr id="header"></tr>');
+        $.each(headers, function(fieldname, field) { $("#header").append('<th>'+fieldname+'</th>');}); 
+        $.each(data, function(key, val) { 
+            $("#table_obj").append('<tr id="data'+val.pk+'"></tr>');
+            $.each(val.fields, function(fieldname, field) { $("#data"+val.pk).append('<td>'+field+'</td>'); });
+            }); 
+        });
+        return false;
+    }
+
+$(document).ready(function(){
+$.get('manage', function(data) {
+  $.each(data.models, function(index, value){
+    var anchorLink = '<a onclick="model(\'{% url 'manage' %}json/'+value+'/\') ; return false;" href="#">' + value + '</a></br>';
+    $('#models').append(anchorLink);
+    }
+  )
+});
+});
+</script>
+<table>
+<tr>
+<td id="models"></td>
+<td id="objects"><table id='table_obj'></table></td>
+</tr>
+</table>

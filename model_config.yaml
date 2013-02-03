@@ -1,0 +1,20 @@
+users:
+    title: Users
+    fields:
+         - {id: name, title: Name, type: char}
+         - {id: paycheck, title: Paycheck, type: int}
+         - {id: description, title: Description, type: str}
+
+rooms:
+    title: Rooms
+    fields:
+        - {id: department, title: Department, type: char}
+        - {id: spots, title: Spots, type: int}
+        - {id: description, title: Description, type: str}
+
+cars:
+    title: Cars
+    fields:
+        - {id: brand, title: Brand, type: char}
+        - {id: price, title: Price, type: int}
+        - {id: description, title: Description, type: str}
