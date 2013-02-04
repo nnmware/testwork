@@ -22,7 +22,7 @@ function model(url){
     }
 
 $(document).ready(function(){
-$.get('manage', function(data) {
+$.get('{% url 'manage' %}', function(data) {
   $.each(data.models, function(index, value){
     var anchorLink = '<a onclick="model(\'{% url 'manage' %}json/'+value+'/\') ; return false;" href="#">' + value + '</a></br>';
     $('#models').append(anchorLink);
